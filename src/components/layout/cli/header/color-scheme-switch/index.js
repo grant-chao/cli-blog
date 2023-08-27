@@ -3,7 +3,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {useThemeMode} from "@/hooks";
 import ExtendButton from "@/components/layout/cli/header/extend-button";
 import '@/utils/string';
-import {THEME_KEY, THEME_MODE_KEY} from "@/config/app";
+import {THEME_MODE_KEY} from "@/config/app";
 
 const MODE = {
     LIGHT: "light", // 亮色
@@ -96,7 +96,7 @@ const ColorSchemeSwitch = () => {
         }}
     >
         <Icon type={scheme} className="!text-[20px]"/>
-        <div className={`absolute top-[100%] right-0 shadow rounded-[4px] min-w-[100px] cursor-default ${hidden ? 'hidden' : ''}`}>
+        <div className={`z-[100] absolute top-[100%] right-0 shadow rounded-[4px] min-w-[100px] cursor-default ${hidden ? 'hidden' : ''} bg-white dark:text-black`}>
             {MODES.map((item) => renderMenu(item, mode, onMenuClick))}
         </div>
     </ExtendButton>

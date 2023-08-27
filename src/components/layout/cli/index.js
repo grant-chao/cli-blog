@@ -10,7 +10,7 @@ const CliLayout = (props) => {
 
     return <div className="flex flex-col h-[100%] justify-center items-center">
         <Header />
-        <div className="flex-1 ct">
+        <div className="flex-1 ct relative z-[10]">
             { children }
         </div>
         <Footer />
