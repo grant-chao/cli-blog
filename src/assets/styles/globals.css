@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --header-height: 60px;
+    --container-width: 1200px;
+    --body-bg-color: white;
+    --text-color: black;
+}
+
+.dark {
+    --body-bg-color: #202124;
+    --text-color: white;
+}
+
+@layer components {
+    .ct {
+        width: var(--container-width);
+    }
+}
+
+html, body{
+    height: 100%;
+    font-size: 14px;
+    background: var(--body-bg-color);
+    color: var(--text-color);
+}

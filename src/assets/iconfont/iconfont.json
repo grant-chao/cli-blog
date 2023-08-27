@@ -1,0 +1,37 @@
+{
+  "id": "4226650",
+  "name": "cli-blog",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10944037",
+      "name": "sm-follow-up-16",
+      "font_class": "follow",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "248945",
+      "name": "dark",
+      "font_class": "dark",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "248946",
+      "name": "light",
+      "font_class": "light",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "13253771",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    }
+  ]
+}
