@@ -15,6 +15,11 @@ const Terminal = (props) => {
 
     const [history, setHistory] = useState([init]);
     const [inputKey, setInputKey] = useState(Date.now());
+    const [onProcess, setOnProcess] = useState(false);
+
+    const onFinished = useCallback((code) => {
+        setOnProcess(false);
+    }, []);
 
     const onInputSubmit = useCallback((v) => {
         const n = v.split(' ')[0];
@@ -27,10 +32,13 @@ const Terminal = (props) => {
         if(cmd) { // 支持的命令
             const code = cmd.main(v);
             const CMD = cmd.component;
+            if(cmd.async) {
+                setOnProcess(true);
+            }
             setHistory([
                 ...history,
                 <Input key="history" readOnly={true} value={v} code={code} error={code !== 0} />,
-                <CMD key={code} code={code} />
+                <CMD key={code} params={v.replace(n, '').trim()} code={code} onFinished={onFinished} />
             ]);
         } else { // 命令未找到
             const info = command.find(({name}) => (name === 'not-found'));
@@ -48,7 +56,7 @@ const Terminal = (props) => {
 
     return <div>
         {history.map(renderHistory)}
-        <Input key={inputKey} onSubmit={onInputSubmit} />
+        { onProcess ? null: <Input key={inputKey} onSubmit={onInputSubmit} /> }
     </div>
 };
 

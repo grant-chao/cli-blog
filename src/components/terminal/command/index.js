@@ -1,7 +1,8 @@
+import '@/utils/string';
 import Help from "@/components/terminal/command/help";
 import NotFound from "@/components/terminal/command/not-found";
 import Open from "@/components/terminal/command/open";
-import '@/utils/string';
+import Login from "@/components/terminal/command/login";
 
 export default [
     {
@@ -31,6 +32,15 @@ export default [
             return 0;
         },
         component: Open
+    },
+    {
+        name: 'login',
+        async: true,
+        description: '用户登录，语法：login <user>'.i18n(),
+        main: () => {
+            return 0;
+        },
+        component: Login
     },
     {
         name: 'not-found',
