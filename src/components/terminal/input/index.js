@@ -35,19 +35,19 @@ const Input = (props) => {
                 &nbsp;~
             </div>
         </div>
-        <div className="flex-1 mx-[15px] h-[20px] flex justify-center items-center">
-            <input
-                ref={inputRef}
-                className="w-[100%] h-[20px]"
-                value={val}
-                readOnly={readOnly}
-                onInput={(e) => setVal(e.target.value)}
-                onKeyDown={(e) => {
-                    if(e.key === 'Enter') {
-                        submit();
-                    }
-                }}
-            />
+        <div className="flex-1 mx-[15px] h-[20px] flex justify-start items-center">
+            {
+                readOnly ? value : <input
+                    ref={inputRef}
+                    className="w-[100%] h-[20px]"
+                    onInput={(e) => setVal(e.target.value)}
+                    onKeyDown={(e) => {
+                        if(e.key === 'Enter') {
+                            submit();
+                        }
+                    }}
+                />
+            }
         </div>
         <div className="flex">
             <div className={classNames(styles.rightTriangle, error ? styles.error : null,  'z-10')}>

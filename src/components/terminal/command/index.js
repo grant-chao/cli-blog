@@ -3,14 +3,18 @@ import Help from "@/components/terminal/command/help";
 import NotFound from "@/components/terminal/command/not-found";
 import Open from "@/components/terminal/command/open";
 import Login from "@/components/terminal/command/login";
+import helpMain from '@/components/terminal/command/help/main';
+import openMain from '@/components/terminal/command/open/main';
+import loginMain from '@/components/terminal/command/login/main';
+import notFoundMain from '@/components/terminal/command/not-found/main';
+import themeMain from '@/components/terminal/command/theme/main';
+import Theme from "@/components/terminal/command/theme";
 
 export default [
     {
         name: 'help',
         description: '查看帮助'.i18n(),
-        main: () => {
-            return 0;
-        },
+        main: helpMain,
         component: Help
     },
     {
@@ -19,35 +23,27 @@ export default [
     },
     {
         name: 'open',
-        description: '打开链接，语法：open <url>'.i18n(),
-        main: (cmd) => {
-            cmd = cmd.replace('open', '').trim();
-            let reg=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-            const checked = !!reg.test(cmd)
-            if(checked) {
-                window.open(cmd);
-            }else{
-                return 1;
-            }
-            return 0;
-        },
+        description: '打开链接。用法：open <url>'.i18n(),
+        main: openMain,
         component: Open
+    },
+    {
+        name: 'theme',
+        description: '设置主题模式。用法：theme <dark|light|system>'.i18n(),
+        main: themeMain,
+        component: Theme
     },
     {
         name: 'login',
         async: true,
-        description: '用户登录，语法：login <user>'.i18n(),
-        main: () => {
-            return 0;
-        },
+        description: '用户登录。用法：login <user>'.i18n(),
+        main: loginMain,
         component: Login
     },
     {
         name: 'not-found',
         hide: true,
-        main: () => {
-            return 127;
-        },
+        main: notFoundMain,
         component: NotFound
     }
 ]

@@ -18,6 +18,12 @@
     .ct {
         width: var(--container-width);
     }
+    @media screen and (max-width: 1230px) {
+        .ct {
+            width: calc(100% - 30px);
+            margin: 0 15px;
+        }
+    }
 }
 
 html, body{

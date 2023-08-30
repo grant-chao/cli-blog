@@ -3,6 +3,7 @@
 import "the-new-css-reset/css/reset.css";
 import '@/assets/styles/globals.css';
 import '@/utils/string';
+import '@/plugin/rest';
 import { RecoilRoot } from 'recoil';
 import {detectLang} from "@/utils/i18n";
 import langList from "@/config/lang.list";
