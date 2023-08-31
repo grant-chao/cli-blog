@@ -1,21 +1,18 @@
 import {success, error} from "@/plugin/server";
 import '@/utils/string.server';
-import execute from "@/plugin/mysql";
+import db from "@/plugin/db";
 
 export async function POST(request) {
     const data = await request.json();
-    const result = await execute({
-        sql: 'select count(id) as size from user where username = ?',
-        values: [data.username]
+    const size = await db.user.count({
+        where: data
     });
-    const size = result[0].size;
     if(size === 0) {
         return error({
             code: 1,
             data: false
         })
     }
-    // 网络请求
     return success({
         data: true
     })
