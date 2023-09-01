@@ -23,7 +23,7 @@ const Header = () => {
         },
     ];
 
-    return <header className="z-[100] sticky top-0 ct h-[var(--header-height)] flex justify-center items-center">
+    return <header className="z-[100] shrink-0 sticky top-0 ct h-[var(--header-height)] flex justify-center items-center bg-white dark:bg-[var(--body-bg-color)]">
         <Logo />
         <ul className="flex-1 flex justify-center items-center">
             {

@@ -1,8 +1,9 @@
-import {useEffect, useState, useImperativeHandle, forwardRef, useCallback} from "react";
+import {useEffect, useState, useImperativeHandle, forwardRef, useCallback, useRef} from "react";
 import Loading from "@/components/terminal/loading";
 import {check, login} from "@/rest/user";
 import PasswordInput from "@/components/terminal/input/password";
 import md5 from "md5";
+import {TOKEN_KEY} from "@/config/app";
 
 const Login = forwardRef((props, ref) => {
     const {
@@ -10,7 +11,7 @@ const Login = forwardRef((props, ref) => {
         onFinished = (code) => {}
     } = props;
 
-    const [code, setCode] = useState(0);
+    const [code, setCode] = useState(props?.code);
     const [checking, setChecking] = useState(false);
     const [noUser, setNoUser] = useState(false);
     const [inputPassword, setInputPassword] = useState(false);
@@ -18,6 +19,7 @@ const Login = forwardRef((props, ref) => {
     const [submitting, setSubmitting] = useState(false);
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
+    const networkRef = useRef(null);
 
     useEffect(() => {
         if(!params) { // 未输入参数
@@ -28,7 +30,9 @@ const Login = forwardRef((props, ref) => {
 
     const checkUser = async (user) => {
         setChecking(true);
-        const { data } = await check(user);
+        const handler = check(user);
+        networkRef.current = handler;
+        const { data } = await handler;
         setChecking(false);
         if(data) {
             setInputPassword(true);
@@ -43,12 +47,15 @@ const Login = forwardRef((props, ref) => {
         setSubmitting(true);
         setPassword('');
         setMessage('');
-        const { success, data } = await login({
+        const handler = login({
             username: params,
             password: md5(password)
         });
+        networkRef.current = handler;
+        const { success, data } = await handler;
         setSubmitting(false);
         if(success) {
+            localStorage.setItem(TOKEN_KEY, data);
             onFinished(0);
             setMessage("登录成功".i18n());
             setSuccess(true);
@@ -74,6 +81,7 @@ const Login = forwardRef((props, ref) => {
         cancel: () => {
             setCode(-1);
             onFinished(-1);
+            networkRef.current?.abort();
         }
     }));
 
@@ -82,10 +90,10 @@ const Login = forwardRef((props, ref) => {
         { code === -1 ? '程序中断'.i18n(): null }
         {
             code === 0 ? <>
-                { checking ? <div className="flex justify-start items-center"><Loading /> 正在确认用户</div> : null }
+                { checking ? <div className="flex justify-start items-center"><Loading /> {"正在确认用户".i18n()}</div> : null }
                 { noUser ? '用户不存在'.i18n() : null }
                 { inputPassword ? <PasswordInput onEnter={onPasswordEnter} title={"请输入密码：".i18n()} /> : null }
-                { submitting ? <div className="flex justify-start items-center"><Loading /> 正在验证登录</div> : null }
+                { submitting ? <div className="flex justify-start items-center"><Loading /> {"正在验证登录".i18n()}</div> : null }
                 { message ? <div className={`${success ? 'text-green-600' : 'text-red-500'}`}>{message}</div> : null }
             </> : null
         }

@@ -2,6 +2,7 @@ import {useCallback, useState, useRef} from "react";
 import Input from "@/components/terminal/input";
 import command from "@/components/terminal/command";
 import { useHotkeys } from 'react-hotkeys-hook';
+import CommandWrapper from "@/components/terminal/command/wrapper";
 
 const renderHistory = (history, index) => {
     return <div key={index} className="mb-[10px] leading-[26px]">
@@ -19,13 +20,13 @@ const Terminal = (props) => {
     const [onProcess, setOnProcess] = useState(false);
     const currentRef = useRef();
 
-    const onFinished = useCallback((code) => {
+    const onFinished = (code) => {
         setOnProcess(false);
-    }, []);
+    };
 
-    const onCancel = useCallback(() => {
+    const onCancel = () => {
         currentRef.current?.cancel()
-    }, []);
+    };
 
     useHotkeys('ctrl+c', onCancel);
 
@@ -47,7 +48,7 @@ const Terminal = (props) => {
             setHistory([
                 ...history,
                 <Input key="history" readOnly={true} value={v} code={code} error={code !== 0} />,
-                <CMD ref={cmd.async ? currentRef : undefined} key={code} params={v.replace(n, '').trim()} code={code} onFinished={onFinished} />
+                <CommandWrapper ref={currentRef} key={code} async={cmd.async} params={v.replace(n, '').trim()} code={code} onFinished={onFinished} command={CMD} />
             ]);
         } else { // 命令未找到
             const info = command.find(({name}) => (name === 'not-found'));

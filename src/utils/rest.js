@@ -1,7 +1,7 @@
 import Axios from 'axios';
 const CancelToken = Axios.CancelToken;
 
-const ERROR_MESSAGE = '{#网络错误#}';
+const ERROR_MESSAGE = '网络错误'.i18n();
 
 let _aliasMap = {};
 let _config = {};

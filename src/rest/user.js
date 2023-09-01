@@ -1,11 +1,15 @@
 import {post} from "@/utils/rest";
 
-export const check = async (username) => {
-    return await post("@api/user/check/", {
+export const check = (username) => {
+    return post("@api/user/check/", {
         username
     });
 };
 
-export const login = async (data) => {
-    return await post("@api/user/login/", data);
+export const login = (data) => {
+    return post("@api/user/login/", data);
+};
+
+export const logout = () => {
+    return post("@api/user/logout/");
 };

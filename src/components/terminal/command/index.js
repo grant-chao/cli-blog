@@ -9,6 +9,8 @@ import loginMain from '@/components/terminal/command/login/main';
 import notFoundMain from '@/components/terminal/command/not-found/main';
 import themeMain from '@/components/terminal/command/theme/main';
 import Theme from "@/components/terminal/command/theme";
+import Logout from "@/components/terminal/command/logout";
+import logoutMain from '@/components/terminal/command/logout/main';
 
 export default [
     {
@@ -39,6 +41,13 @@ export default [
         description: '用户登录。用法：login <user>'.i18n(),
         main: loginMain,
         component: Login
+    },
+    {
+        name: 'logout',
+        async: true,
+        description: '退出当前登录账号'.i18n(),
+        main: logoutMain,
+        component: Logout
     },
     {
         name: 'not-found',

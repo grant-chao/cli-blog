@@ -7,3 +7,5 @@ export const APP_NAME = "Grant's Blog";
 export const THEME_MODE_KEY = '_cli_blog_theme_mode';
 
 export const DEVICE_ID_KEY = '_cli_device_id';
+
+export const TOKEN_KEY = "_cli_token";

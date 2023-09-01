@@ -1,5 +1,5 @@
 import {isMobile, isServer, uuid} from "@/utils";
-import {DEVICE_ID_KEY} from "@/config/app";
+import {DEVICE_ID_KEY, TOKEN_KEY} from "@/config/app";
 import packageInfo from '../../package.json';
 import Bowser from 'bowser';
 
@@ -25,6 +25,7 @@ export const get = () => {
         "CLIENT-SYSTEM-VERSION": browser.os.version,
         "CLIENT-TIMESTAMP": Date.now()
     }
-    headers['Authorization'] = "Bearer " + "";
+    const token = localStorage.getItem(TOKEN_KEY);
+    if(token) headers['Authorization'] = `Bearer ${token}`;
     return headers;
 }
