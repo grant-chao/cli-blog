@@ -1,5 +1,6 @@
 import {useImperativeHandle, forwardRef, useRef, useState, useCallback} from 'react';
 
+
 const Wrapper = forwardRef((props, ref) => {
     const {
         command,
@@ -21,6 +22,7 @@ const Wrapper = forwardRef((props, ref) => {
     useImperativeHandle(ref,  () => ({
         cancel
     }));
+
     return <Command
         {...rest}
         ref={async ? commandRef : undefined}

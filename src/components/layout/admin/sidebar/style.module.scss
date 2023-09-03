@@ -1,0 +1,20 @@
+.sidebar {
+    :global {
+        .arco-menu-vertical .arco-menu-inner {
+            padding: 0;
+        }
+        .arco-menu .arco-menu-group-title .arco-icon,
+        .arco-menu .arco-menu-inline-header .arco-icon,
+        .arco-menu .arco-menu-item .arco-icon,
+        .arco-menu .arco-menu-pop-header .arco-icon {
+            margin-right: 8px;
+            margin-left: 5px;
+        }
+        .arco-menu-collapse .arco-menu-group-title .arco-icon,
+        .arco-menu-collapse .arco-menu-inline-header .arco-icon,
+        .arco-menu-collapse .arco-menu-item .arco-icon,
+        .arco-menu-collapse .arco-menu-pop-header .arco-icon {
+            margin-right: 100vw;
+        }
+    }
+}

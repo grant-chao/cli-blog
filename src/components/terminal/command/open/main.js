@@ -1,4 +1,11 @@
-const main = (args) => {
+import {getLang} from "@/utils";
+
+const main = (args, router) => {
+    if('admin' === args) {
+        const lang = getLang();
+        router.push(`/${lang}/admin/`);
+        return 0;
+    }
     let reg=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
     const checked = !!reg.test(args)
     if(checked) {

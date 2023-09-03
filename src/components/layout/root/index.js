@@ -7,11 +7,12 @@ import '@/plugin/rest';
 import { RecoilRoot } from 'recoil';
 import {detectLang} from "@/utils/i18n";
 import langList from "@/config/lang.list";
+import {initializeRecoilState} from "@/state";
 
-const RootLayout = ({children}) => {
+const RootLayout = ({children, initializeState}) => {
     const detected = detectLang(langList);
     if(detected) return null;
-    return <RecoilRoot>{children}</RecoilRoot>
+    return <RecoilRoot initializeState={initializeRecoilState(initializeState)}>{children}</RecoilRoot>
 };
 
 export default RootLayout;

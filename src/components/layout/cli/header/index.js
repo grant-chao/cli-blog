@@ -18,7 +18,7 @@ const Header = () => {
             title: "文章".i18n()
         },
         {
-            url: `/${params.LANG}/about/`,
+            url: `/${params.LANG}/pages/about/`,
             title: "关于".i18n()
         },
     ];

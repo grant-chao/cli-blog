@@ -3,6 +3,7 @@ import Input from "@/components/terminal/input";
 import command from "@/components/terminal/command";
 import { useHotkeys } from 'react-hotkeys-hook';
 import CommandWrapper from "@/components/terminal/command/wrapper";
+import {useRouter} from "next/navigation";
 
 const renderHistory = (history, index) => {
     return <div key={index} className="mb-[10px] leading-[26px]">
@@ -19,6 +20,7 @@ const Terminal = (props) => {
     const [inputKey, setInputKey] = useState(Date.now());
     const [onProcess, setOnProcess] = useState(false);
     const currentRef = useRef();
+    const router = useRouter();
 
     const onFinished = (code) => {
         setOnProcess(false);
@@ -40,7 +42,7 @@ const Terminal = (props) => {
         const args = v.replace(n, '').trim();
         const cmd = command.find(({name}) => (n === name));
         if(cmd) { // 支持的命令
-            const code = cmd.main(args);
+            const code = cmd.main(args, router);
             const CMD = cmd.component;
             if(cmd.async) {
                 setOnProcess(true);
@@ -52,7 +54,7 @@ const Terminal = (props) => {
             ]);
         } else { // 命令未找到
             const info = command.find(({name}) => (name === 'not-found'));
-            const code = info.main(args);
+            const code = info.main(args, router);
             const NotFound = info.component;
             setHistory([
                 ...history,

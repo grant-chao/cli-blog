@@ -11,7 +11,7 @@ export const title = (title) => {
 }
 
 export const keywords = (keys) => {
-    const list = ['Cli Blog'.i18n()];
+    const list = ['Cli,Blog'.i18n()];
     if(isString(keys)) {
         list.push(keys);
     }else if(isArray(keys)) {
