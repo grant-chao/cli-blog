@@ -4,7 +4,7 @@ const Open = (props) => {
     } = props;
 
     const messages = {
-        0: '已经在新窗口为你打开链接'.i18n(),
+        0: '已经为你打开链接'.i18n(),
         1: '不是正确的链接地址'.i18n()
     }
 

@@ -22,7 +22,7 @@ const Sidebar = () => {
 
     useEffect(() => {
         setOpenKeys(uniq([
-            ...openKeys,
+            ...(openKeys || []),
             ...(state.openKeys || [])
         ]));
     }, [state.openKeys])
